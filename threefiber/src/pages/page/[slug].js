@@ -7,7 +7,7 @@ export default function DynamicPage() {
   const { query } = useRouter();
   return (
     <main className="flex flex-col items-center justify-center min-h-screen">
-      <Title text={`Page: ${query.slug}`} />
+      <Title text={`salut les gars: ${query.slug}`} />
       <Scene3D />
       <TextContent text="Voici un texte descriptif pour cette page dynamique." />
     </main>

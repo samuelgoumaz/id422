@@ -1,26 +1,37 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 
 export default function Scene3D() {
+  const [myColor, setMyColor] = useState(false); /* Is Loading */
+
+  function changeColor (color) {
+    setMyColor(color)
+  }
+
+
+
   return (
     <div className="w-screen h-screen">
       <Canvas style={{ width: "1920px", height: "1080px" }}>
         <CameraController />
         <ambientLight intensity={0.5} />
         <directionalLight position={[2, 5, 2]} intensity={1} />
-        <Cube />
+        <Cube color={myColor === false ? "red" : myColor} />
       </Canvas>
+      <button onClick={() => changeColor("pink")}>change color</button>
+      <button onClick={() => changeColor("yellow")}>change color</button>
     </div>
   );
 }
 
 // Cube simple
-function Cube() {
+function Cube(props) {
+  console.log("cube", props.color)
   return (
     <mesh position={[0, 0.5, 0]}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="red" />
+      <meshStandardMaterial color={String(props.color)} />
     </mesh>
   );
 }
